@@ -27,8 +27,8 @@ class Penguji extends CI_Controller {
     {
         $username = $this->session->userdata('username');
         $data['berita'] = $this->M_Pengumuman->get_berita(array('id'=>1))->row();
-        $data['nama'] = $this->M_Pengumuman->get_nama(array('username'=>$username))->row();
-        $this->load->view('layout/header_penguji', $username);
+        $nama['nama'] = $this->M_Pengumuman->get_nama(array('username'=>$username))->row();
+        $this->load->view('layout/header_penguji', $nama);
         $this->load->view('penguji/dashboard', $data);
         $this->load->view("layout/footer");
     }
@@ -37,7 +37,8 @@ class Penguji extends CI_Controller {
     {
         $username = $this->session->userdata('username');
         $data['view'] = $this->M_Sempro->getwhere_sempropenguji(array('id_penguji'=>$username))->result();
-        $this->load->view('layout/header_penguji', $username);
+        $nama['nama'] = $this->M_Pengumuman->get_nama(array('username'=>$username))->row();
+        $this->load->view('layout/header_penguji', $nama);
         $this->load->view('penguji/seminar_proposal', $data);
         // $this->load->view("layout/footer");
     }
@@ -46,7 +47,8 @@ class Penguji extends CI_Controller {
     {
         $username = $this->session->userdata('username');
         $data['view'] = $this->M_Ujian->getwhere_ujianpenguji(array('id_penguji'=>$username))->result();
-        $this->load->view('layout/header_penguji', $username);
+        $nama['nama'] = $this->M_Pengumuman->get_nama(array('username'=>$username))->row();
+        $this->load->view('layout/header_penguji', $nama);
         $this->load->view('penguji/ujian_tesis', $data);
         // $this->load->view("layout/footer");
     }
@@ -64,7 +66,8 @@ class Penguji extends CI_Controller {
         $data['penguji2'] = $this->M_Pengujian->getwhere_penguji(array('id_tesis'=>$id_tesis,'ket'=>"penguji2"))->row();
         $data['penguji3'] = $this->M_Pengujian->getwhere_penguji(array('id_tesis'=>$id_tesis,'ket'=>"penguji3"))->row();
         $data['penguji4'] = $this->M_Pengujian->getwhere_penguji(array('id_tesis'=>$id_tesis,'ket'=>"penguji4"))->row();
-        $this->load->view('layout/header_penguji', $username);
+        $nama['nama'] = $this->M_Pengumuman->get_nama(array('username'=>$username))->row();
+        $this->load->view('layout/header_penguji', $nama);
         $this->load->view('penguji/penilaian_sempro', $data);
         $this->load->view("layout/footer");
     }
@@ -84,7 +87,8 @@ class Penguji extends CI_Controller {
         $data['penguji2'] = $this->M_Pengujian->getwhere_penguji(array('id_tesis'=>$id_tesis,'ket'=>"penguji2"))->row();
         $data['penguji3'] = $this->M_Pengujian->getwhere_penguji(array('id_tesis'=>$id_tesis,'ket'=>"penguji3"))->row();
         $data['penguji4'] = $this->M_Pengujian->getwhere_penguji(array('id_tesis'=>$id_tesis,'ket'=>"penguji4"))->row();
-        $this->load->view('layout/header_penguji', $username);
+        $nama['nama'] = $this->M_Pengumuman->get_nama(array('username'=>$username))->row();
+        $this->load->view('layout/header_penguji', $nama);
         $this->load->view('penguji/edit_penilaian_sempro', $data);
         $this->load->view("layout/footer");
     }
@@ -103,7 +107,8 @@ class Penguji extends CI_Controller {
         $data['penguji3'] = $this->M_Pengujian->getwhere_penguji_ujian(array('id_tesis'=>$id_tesis,'ket'=>"penguji3"))->row();
         $data['penguji4'] = $this->M_Pengujian->getwhere_penguji_ujian(array('id_tesis'=>$id_tesis,'ket'=>"penguji4"))->row();
         $data['penguji5'] = $this->M_Pengujian->getwhere_penguji_ujian(array('id_tesis'=>$id_tesis,'ket'=>"penguji5"))->row();
-        $this->load->view('layout/header_penguji', $username);
+        $nama['nama'] = $this->M_Pengumuman->get_nama(array('username'=>$username))->row();
+        $this->load->view('layout/header_penguji', $nama);
         $this->load->view('penguji/penilaian_ujian', $data);
         $this->load->view("layout/footer");
     }
@@ -125,7 +130,8 @@ class Penguji extends CI_Controller {
         $data['penguji3'] = $this->M_Pengujian->getwhere_penguji_ujian(array('id_tesis'=>$id_tesis,'ket'=>"penguji3"))->row();
         $data['penguji4'] = $this->M_Pengujian->getwhere_penguji_ujian(array('id_tesis'=>$id_tesis,'ket'=>"penguji4"))->row();
         $data['penguji5'] = $this->M_Pengujian->getwhere_penguji_ujian(array('id_tesis'=>$id_tesis,'ket'=>"penguji5"))->row();
-        $this->load->view('layout/header_penguji', $username);
+        $nama['nama'] = $this->M_Pengumuman->get_nama(array('username'=>$username))->row();
+        $this->load->view('layout/header_penguji', $nama);
         $this->load->view('penguji/edit_penilaian_ujian', $data);
         $this->load->view("layout/footer");
     }

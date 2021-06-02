@@ -136,6 +136,13 @@
                         <i class="fa fa-bars"></i>
                     </button>
 
+                    <form
+                        class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
+                        <div class="input-group">
+                        <b>Admin</b>
+                        </div>
+                    </form>
+
                     <!-- Topbar Navbar -->
                     <ul class="navbar-nav ml-auto">
 
@@ -178,18 +185,7 @@
                                 <h6 class="dropdown-header">
                                     Profile Center
                                 </h6>
-                                <a class="dropdown-item d-flex align-items-center" href="#">
-                                    <div class="mr-3">
-                                        <div class="icon-circle bg-primary">
-                                            <i class="fas fa-user text-white"></i>
-                                        </div>
-                                    </div>
-                                    <div>
-                                        <div class="small text-gray-500"></div>
-                                        User Profile
-                                    </div>
-                                </a>
-                                <a class="dropdown-item d-flex align-items-center" href="#">
+                                <a class="dropdown-item d-flex align-items-center" href="<?= base_url('Welcome/changePass');?>">
                                     <div class="mr-3">
                                         <div class="icon-circle bg-success">
                                             <i class="fas fa-user-edit text-white"></i>
