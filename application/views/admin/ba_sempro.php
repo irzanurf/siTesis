@@ -18,10 +18,10 @@
                                     <input type="hidden" class="form-control" name="id" value=<?= $tesis->id?>  >
                                 </div>
                                 <div class="form-group">
-                                    <input type="hidden" class="form-control" name="penguji1" value=<?= $penguji1->nama?>  >
+                                    <textarea style="display:none;" class="form-control" name="penguji1"><?= $penguji1->nama?></textarea>
                                 </div>
                                 <div class="form-group">
-                                    <input type="hidden" class="form-control" name="penguji2" value=<?= $penguji2->nama?>  >
+                                    <textarea style="display:none;" class="form-control" name="penguji2"><?= $penguji2->nama?></textarea>
                                 </div>
                                 <?php if (empty($penguji3->nama)) : ?>
                                 <div class="form-group">
@@ -29,7 +29,7 @@
                                 </div>
                                 <?php else : ?>
                                 <div class="form-group">
-                                    <input type="hidden" class="form-control" name="penguji3" value=<?= $penguji3->nama?>  >
+                                <textarea style="display:none;" class="form-control" name="penguji3"><?= $penguji3->nama?></textarea>
                                 </div>
                                 <?php endif; ?>
 
@@ -39,7 +39,7 @@
                                 </div>
                                 <?php else : ?>
                                 <div class="form-group">
-                                    <input type="hidden" class="form-control" name="penguji4" value=<?= $penguji4->nama?>  >
+                                <textarea style="display:none;" class="form-control" name="penguji4"><?= $penguji4->nama?></textarea>
                                 </div>
                                 <?php endif; ?>
 
@@ -65,7 +65,7 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label>Tempat Seminar Proposal</label>
+                                    <label>Tempat Seminar Proposal/Link Seminar Proposal</label>
                                     <input class="form-control" name="tempat" value="<?= $view->tempat?>" readonly>
                                 </div>
 

@@ -612,7 +612,7 @@ class Admin extends CI_Controller {
     {
         $username = $this->input->post('username');
         $this->M_Dosen->del_dosen(array('username'=>"$username"));
-        $this->M_Dosen->del_akun();
+        $this->M_Dosen->del_akun(array('username'=>"$username"));
         redirect("admin/dosen"); 
     }
 

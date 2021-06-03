@@ -32,7 +32,7 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label>Tempat Ujian Tesis</label>
+                                    <label>Tempat Ujian Tesis/Link Ujian Tesis</label>
                                     <input class="form-control" name="tempat" value="<?= $view->tempat?>" disabled>
                                 </div>
 

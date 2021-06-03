@@ -30,7 +30,7 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label>Tempat Seminar Proposal</label>
+                                    <label>Tempat Seminar Proposal/Link Seminar Proposal</label>
                                     <input class="form-control" name="tempat" value="<?= $view->tempat?>" disabled>
                                 </div>
 
