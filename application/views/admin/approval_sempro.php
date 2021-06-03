@@ -59,14 +59,16 @@
                                                 </button>
                                                 </form>
 
-                                            <?php endif ?>
-
                                                 <form style="display:inline-block;" method="post" action="<?= base_url('admin/ba_sempro');?>">
                                                 <input type='hidden' name="id" value="<?= $v->id_tesis ?>">
                                                 <button type="Submit" class="btn btn-info">
                                                 Berita Acara
                                                 </button>
                                                 </form>
+
+                                            <?php endif ?>
+
+                                                
                                             </td>
                                         </tr>
                                         <?php } ?>
