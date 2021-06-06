@@ -43,6 +43,16 @@
                                 </div>
                                 <?php endif; ?>
 
+                                <?php if (empty($penguji5->nama)) : ?>
+                                <div class="form-group">
+                                    <input type="hidden" class="form-control" name="penguji5" value="-"  >
+                                </div>
+                                <?php else : ?>
+                                <div class="form-group">
+                                <textarea style="display:none;" class="form-control" name="penguji5"><?= $penguji5->nama?></textarea>
+                                </div>
+                                <?php endif; ?>
+
                                 <div class="form-group">
                                     <label>Mahasiswa</label>
                                     <input class="form-control" name="nama" value="<?= $tesis->nama?>" readonly>
@@ -70,62 +80,99 @@
                                 </div>
 
                                 <div class="form-group">
-                                <?php $a=$penguji1->nilai ?>
-                                    <label>Pembimbing Ketua/Penguji 1 (<?= $penguji1->nama?>)</label>
-                                    <input class="form-control" name="nilai1" value="<?= $penguji1->nilai?>" readonly>
-                                    <textarea class="form-control" name="cat1" readonly><?= $penguji1->catatan?></textarea>
-                                </div>
-
-                                <div class="form-group">
-                                <?php $a=$a+($penguji2->nilai) ?>
-                                    <label>Pembimbing Anggota/Penguji 2 (<?= $penguji2->nama?>)</label>
-                                    <input class="form-control" name="nilai2" value="<?= $penguji2->nilai?>" readonly>
-                                    <textarea class="form-control" name="cat2" readonly><?= $penguji2->catatan?></textarea>
-                                </div>
-
-                                <div class="form-group">
-                                <?php 
-                                    if(empty($penguji3->nama)) :?>
-                                    <label>Penguji 3</label>
-                                    <input class="form-control" name="cat3" value="-" readonly>
-                                    <textarea class="form-control" name="cat3" readonly></textarea>
-
+                                    <?php if(!empty($penguji1->nama)): ?>
+                                    <label>Pembimbing Ketua/Penguji 1 <b>(<?= $penguji1->nama?>)</b></label>
+                                    <?php else: ?>
+                                    <label>Pembimbing Ketua/Penguji 1 <b>(-)</b></label>
+                                    <?php endif; ?>
+                                    <?php 
+                                    if(empty($penguji1->nilai) || ($penguji1->nilai)==0) : ?>
+                                    <input class="form-control" name="nilai1" value="-" readonly>
+                                    
                                     <?php
                                     else : ?>
-                                     <?php $a=$a+($penguji3->nilai) ?>
-                                    <label>Penguji 3 (<?= $penguji3->nama?>)</label>
+                                    <input class="form-control" name="nilai1" value="<?= $penguji1->nilai ?>" readonly>
+                                    <textarea class="form-control" name="cat1" readonly><?= $penguji1->catatan?></textarea>
+                                    
+                                    <?php endif; ?>
+                                </div>
+
+                                <div class="form-group">
+                                    <?php if(!empty($penguji2->nama)): ?>
+                                    <label>Pembimbing Anggota/Penguji 2 <b>(<?= $penguji2->nama?>)</b></label>
+                                    <?php else: ?>
+                                    <label>Pembimbing Anggota/Penguji 2 <b>(-)</b></label>
+                                    <?php endif; ?>
+                                    <?php 
+                                    if(empty($penguji2->nilai) || ($penguji2->nilai)==0) : ?>
+                                    <input class="form-control" name="nilai2" value="-" readonly>
+                                    
+                                    <?php
+                                    else : ?>
+                                    <input class="form-control" name="nilai2" value="<?= $penguji2->nilai ?>" readonly>
+                                    <textarea class="form-control" name="cat2" readonly><?= $penguji2->catatan?></textarea>
+                                    
+                                    <?php endif; ?>
+                                </div>
+
+                                <div class="form-group">
+                                    <?php if(!empty($penguji3->nama)): ?>
+                                    <label>Penguji 3 <b>(<?= $penguji3->nama?>)</b></label>
+                                    <?php else: ?>
+                                    <label>Penguji 3 <b>(-)</b></label>
+                                    <?php endif; ?>
+                                    <?php 
+                                    if(empty($penguji3->nilai) || ($penguji3->nilai)==0) : ?>
+                                    <input class="form-control" name="nilai3" value="-" readonly>
+                                    
+                                    <?php
+                                    else :?>
                                     <input class="form-control" name="nilai3" value="<?= $penguji3->nilai ?>" readonly>
                                     <textarea class="form-control" name="cat3" readonly><?= $penguji3->catatan?></textarea>
-
+                                    
                                     <?php endif; ?>
                                 </div>
 
                                 <div class="form-group">
-                                <?php 
-                                    if(empty($penguji4->nama)) :?>
-                                    <label>Penguji 4</label>
+                                    <?php if(!empty($penguji4->nama)): ?>
+                                    <label>Penguji 4 <b>(<?= $penguji4->nama?>)</b></label>
+                                    <?php else: ?>
+                                    <label>Penguji 4 <b>(-)</b></label>
+                                    <?php endif; ?>
+                                    <?php 
+                                    if(empty($penguji4->nilai) || ($penguji4->nilai)==0) : ?>
                                     <input class="form-control" name="nilai4" value="-" readonly>
-                                    <textarea class="form-control" name="cat4" readonly></textarea>
-
+                                    
                                     <?php
                                     else : ?>
-                                     <?php $a=$a+($penguji4->nilai) ?>
-                                    <label>Penguji 4 (<?= $penguji4->nama?>)</label>
                                     <input class="form-control" name="nilai4" value="<?= $penguji4->nilai ?>" readonly>
                                     <textarea class="form-control" name="cat4" readonly><?= $penguji4->catatan?></textarea>
-
+                                    
                                     <?php endif; ?>
                                 </div>
 
                                 <div class="form-group">
-                                <?php if (empty($penguji3->nama) && empty($penguji4->nama)) : $a=$a/2 ?>
-                                <?php elseif (!empty($penguji3->nama) && empty($penguji4->nama)) : $a=$a/3 ?>
-                                <?php elseif (empty($penguji3->nama) && !empty($penguji4->nama)) : $a=$a/3 ?>
-                                <?php elseif (!empty($penguji3->nama) && !empty($penguji4->nama)) : $a=$a/4 ?>
-                                <?php endif; ?>
+                                    <?php if(!empty($penguji5->nama)): ?>
+                                    <label>Penguji 5 <b>(<?= $penguji5->nama?>)</b></label>
+                                    <?php else: ?>
+                                    <label>Penguji 5 <b>(-)</b></label>
+                                    <?php endif; ?>
+                                    <?php 
+                                    if(empty($penguji5->nilai) || ($penguji5->nilai)==0) : ?>
+                                    <input class="form-control" name="nilai5" value="-" readonly>
+                                    
+                                    <?php
+                                    else : ?>
+                                    <input class="form-control" name="nilai5" value="<?= $penguji5->nilai ?>" readonly>
+                                    <textarea class="form-control" name="cat5" readonly><?= $penguji5->catatan?></textarea>
+
+                                    <?php endif; ?>
+                                </div>
+
+
+                                <div class="form-group">
                                     <label>Nilai Total</label>
-                                    <?php $a=number_format($a,2); ?>
-                                    <input class="form-control" name="total" value="<?= $a?>" readonly>
+                                    <input class="form-control" name="total" value="<?= $view->nilai ?>" readonly>
                                 </div>
                                 
                                 <div class="form-group"><label>Keputusan jenis rekomendasi</label><label style="color:red; font-size:12px;"> (*Wajib diisi)</label>
@@ -133,7 +180,7 @@
                                         <?php
                                         foreach ($app as $a) {
                                             ?>
-                                            <option value="<?php echo $a->ket; ?>"<?php echo ($view->status==$a->app) ? "selected='selected'" : "" ?>><?php echo $a->ket; ?>  </option>
+                                            <option value="<?php echo $a->ket; ?>"<?php echo ($view->status==$a->app) ? "selected='selected'" : "" ?>><?php echo $a->app; ?>  </option>
                                             <?php
                                         }
                                         ?>

@@ -35,74 +35,104 @@
                                     <label>Tempat Ujian Tesis/Link Ujian Tesis</label>
                                     <input class="form-control" name="tempat" value="<?= $view->tempat?>" disabled>
                                 </div>
-
+                                <?php $b=0; $a=0; ?>
                                 <div class="form-group">
-                                <?php $a=$penguji1->nilai ?>
+                                    <?php if(!empty($penguji1->nama)): ?>
                                     <label>Pembimbing Ketua/Penguji 1 (<?= $penguji1->nama?>)</label>
-                                    <input class="form-control" name="penguji1" value="<?= $penguji1->nilai?>" disabled>
-                                </div>
-
-                                <div class="form-group">
-                                <?php $a=$a+($penguji2->nilai) ?>
-                                    <label>Pembimbing Anggota/Penguji 2 (<?= $penguji2->nama?>)</label>
-                                    <input class="form-control" name="penguji1" value="<?= $penguji2->nilai?>" disabled>
-                                </div>
-
-                                <div class="form-group">
-                                <?php 
-                                    if(empty($penguji3->nama)) :?>
-                                    <label>Penguji 3</label>
+                                    <?php else: ?>
+                                    <label>Pembimbing Ketua/Penguji 1</label>
+                                    <?php endif; ?>
+                                    <?php 
+                                    if(empty($penguji1->nilai) || ($penguji1->nilai)==0) : ?>
                                     <input class="form-control" name="penguji1" value="-" disabled>
-
+                                    <?php $b=$b ?>
                                     <?php
                                     else : ?>
-                                    <?php $a=$a+($penguji3->nilai) ?>
-                                    <label>Penguji 3 (<?= $penguji3->nama?>)</label>
-                                    <input class="form-control" name="penguji1" value="<?= $penguji3->nilai ?>" disabled>
-
+                                    <?php $a=($penguji1->nilai) ?>
+                                    <input class="form-control" name="penguji1" value="<?= $penguji1->nilai ?>" disabled>
+                                    <textarea class="form-control" name="cat1" readonly><?= $penguji1->catatan?></textarea>
+                                    <?php $b=$b+1 ?>
                                     <?php endif; ?>
                                 </div>
 
                                 <div class="form-group">
-                                <?php 
-                                    if(empty($penguji4->nama)) :?>
-                                    <label>Penguji 4</label>
-                                    <input class="form-control" name="penguji1" value="-" disabled>
+                                    <?php if(!empty($penguji2->nama)): ?>
+                                    <label>Pembimbing Anggota/Penguji 2 (<?= $penguji2->nama?>)</label>
+                                    <?php else: ?>
+                                    <label>Pembimbing Anggota/Penguji 2</label>
+                                    <?php endif; ?>
+                                    <?php 
+                                    if(empty($penguji2->nilai) || ($penguji2->nilai)==0) : ?>
+                                    <input class="form-control" name="penguji2" value="-" disabled>
+                                    <?php $b=$b ?>
+                                    <?php
+                                    else : ?>
+                                    <?php $a=$a+($penguji2->nilai) ?>
+                                    <input class="form-control" name="penguji2" value="<?= $penguji2->nilai ?>" disabled>
+                                    <textarea class="form-control" name="cat2" readonly><?= $penguji2->catatan?></textarea>
+                                    <?php $b=$b+1 ?>
+                                    <?php endif; ?>
+                                </div>
 
+                                <div class="form-group">
+                                    <?php if(!empty($penguji3->nama)): ?>
+                                    <label>Penguji 3 (<?= $penguji3->nama?>)</label>
+                                    <?php else: ?>
+                                    <label>Penguji 3</label>
+                                    <?php endif; ?>
+                                    <?php 
+                                    if(empty($penguji3->nilai) || ($penguji3->nilai)==0) : ?>
+                                    <input class="form-control" name="penguji3" value="-" disabled>
+                                    <?php $b=$b ?>
+                                    <?php
+                                    else :?>
+                                    <?php $a=$a+($penguji3->nilai) ?>
+                                    <input class="form-control" name="penguji3" value="<?= $penguji3->nilai ?>" disabled>
+                                    <textarea class="form-control" name="cat3" readonly><?= $penguji3->catatan?></textarea>
+                                    <?php $b=$b+1 ?>
+                                    <?php endif; ?>
+                                </div>
+
+                                <div class="form-group">
+                                    <?php if(!empty($penguji4->nama)): ?>
+                                    <label>Penguji 4 (<?= $penguji4->nama?>)</label>
+                                    <?php else: ?>
+                                    <label>Penguji 4</label>
+                                    <?php endif; ?>
+                                    <?php 
+                                    if(empty($penguji4->nilai) || ($penguji4->nilai)==0) : ?>
+                                    <input class="form-control" name="penguji4" value="-" disabled>
+                                    <?php $b=$b ?>
                                     <?php
                                     else : ?>
                                     <?php $a=$a+($penguji4->nilai) ?>
-                                    <label>Penguji 4 (<?= $penguji4->nama?>)</label>
-                                    <input class="form-control" name="penguji1" value="<?= $penguji4->nilai ?>" disabled>
-
+                                    <input class="form-control" name="penguji4" value="<?= $penguji4->nilai ?>" disabled>
+                                    <textarea class="form-control" name="cat4" readonly><?= $penguji4->catatan?></textarea>
+                                    <?php $b=$b+1 ?>
                                     <?php endif; ?>
                                 </div>
 
                                 <div class="form-group">
-                                <?php 
-                                    if(empty($penguji5->nama)) :?>
+                                    <?php if(!empty($penguji5->nama)): ?>
+                                    <label>Penguji 5 (<?= $penguji5->nama?>)</label>
+                                    <?php else: ?>
                                     <label>Penguji 5</label>
-                                    <input class="form-control" name="penguji1" value="-" disabled>
-
+                                    <?php endif; ?>
+                                    <?php 
+                                    if(empty($penguji5->nilai) || ($penguji5->nilai)==0) : ?>
+                                    <input class="form-control" name="penguji5" value="-" disabled>
+                                    <?php $b=$b ?>
                                     <?php
                                     else : ?>
-                                    <?php $a=$a+($penguji5->nilai) ?>
-                                    <label>Penguji 5 (<?= $penguji5->nama?>)</label>
-                                    <input class="form-control" name="penguji1" value="<?= $penguji5->nilai ?>" disabled>
-
+                                    <?php $a=$a+($penguji5->nilai); ?>
+                                    <input class="form-control" name="penguji5" value="<?= $penguji5->nilai ?>" disabled>
+                                    <textarea class="form-control" name="cat5" readonly><?= $penguji5->catatan?></textarea>
+                                    <?php $b=$b+1 ?>
                                     <?php endif; ?>
                                 </div>
 
                                 <div class="form-group">
-                                <?php if (empty($penguji3->nama) && empty($penguji4->nama) && !empty($penguji5->nama)) : $a=$a/3 ?>
-                                <?php elseif (!empty($penguji3->nama) && empty($penguji4->nama) && empty($penguji5->nama)) : $a=$a/3 ?>
-                                <?php elseif (empty($penguji3->nama) && !empty($penguji4->nama) && empty($penguji5->nama)) : $a=$a/3 ?>
-                                <?php elseif (empty($penguji3->nama) && !empty($penguji4->nama) && !empty($penguji5->nama)) : $a=$a/4 ?>
-                                <?php elseif (!empty($penguji3->nama) && empty($penguji4->nama) && !empty($penguji5->nama)) : $a=$a/4 ?>
-                                <?php elseif (!empty($penguji3->nama) && !empty($penguji4->nama) && empty($penguji5->nama)) : $a=$a/4 ?>
-                                <?php elseif (!empty($penguji3->nama) && !empty($penguji4->nama) && !empty($penguji5->nama)) : $a=$a/5 ?>
-                                <?php elseif (empty($penguji3->nama) && empty($penguji4->nama) && empty($penguji5->nama)) : $a=$a/2 ?>
-                                    <?php endif; ?>
+                                    <?php $a=$a/$b ?>
                                     <label>Nilai Total</label>
                                     <?php $a=number_format($a,2); ?>
                                     <input class="form-control" name="total" value="<?= $a?>" readonly>

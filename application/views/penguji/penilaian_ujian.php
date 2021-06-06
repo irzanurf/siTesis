@@ -189,9 +189,9 @@
                                 
                     
                         <div class="form-group">
-                        <label><br>Komentar Penilai</label>
+                        <label><br>Komentar Penilai</label><label style="color:red; font-size:12px;"> (*Wajib diisi)</label>
                         <div >
-                            <textarea class="form-control" name="komentar"  rows="3"></textarea>
+                            <textarea class="form-control" name="komentar" rows="3" required=""></textarea>
                         </div>
                         </div>
                                 

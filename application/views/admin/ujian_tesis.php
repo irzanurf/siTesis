@@ -37,10 +37,20 @@
                                             <td><?= $v->judul ?></td>
                                             <td><?= $tgl ?></td>
                                             <td>
+                                            <?php if (($v->status)=="" || ($v->status)==0 || ($v->status)==NULL) :?> 
                                                 <form style="display:inline-block;" method="post" action="<?= base_url('admin/edit_ujian');?>">
                                                 <input type='hidden' name="id" value="<?= $v->id_tesis ?>">
                                                 <button type="Submit" class="btn btn-success">
                                                 Edit
+                                                </button>
+                                                </form>
+                                             <?php else :?>
+                                            <?php endif;?>
+
+                                                <form style="display:inline-block;" method="post" action="<?= base_url('admin/detail_ujian');?>">
+                                                <input type='hidden' name="id" value="<?= $v->id_tesis ?>">
+                                                <button type="Submit" class="btn btn-info">
+                                                Detail
                                                 </button>
                                                 </form>
 

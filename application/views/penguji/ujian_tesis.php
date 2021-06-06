@@ -35,7 +35,7 @@
                                             <td><?= $v->judul ?></td>
                                             <td><?= $tgl ?></td>
                                             <td>
-                                            <?php if (($v->status)=="" || ($v->status)==0 || ($v->status)==NULL) :?> 
+                                            <?php if (empty($v->cek)) :?> 
                                                 <form style="display:inline-block;" method="post" action="<?=base_url('Penguji/penilaian_ujian');?>">
                                                 <input type='hidden' name="id" value="<?= $v->id_tesis ?>">
                                                 <button type="Submit" class="btn btn-success">
@@ -43,18 +43,18 @@
                                                 </button>
                                                 </form>
 
-                                            <?php elseif (($v->status)=="Graded") :?>
+                                            <?php elseif (!empty($v->cek) && (($v->status)=="" || ($v->status)==0 || ($v->status)==NULL || ($v->status)=="Graded" || empty($v->cek))) :?>
                                                 <form style="display:inline-block;" method="post" action="<?=base_url('Penguji/edit_penilaian_ujian');?>">
                                                 <input type='hidden' name="id" value="<?= $v->id_tesis ?>">
                                                 <button type="Submit" class="btn btn-info">
                                                 Edit
                                                 </button>
                                                 </form>
-
-                                            <?php else :?>
+                                            
+                                            <?php else: ?>
                                                Telah di approve pengelola 
 
-                                            <?php endif ?>
+                                            <?php endif; ?>
                                             </td>
                                         </tr>
                                         <?php } ?>

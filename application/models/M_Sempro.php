@@ -38,7 +38,7 @@ class M_Sempro extends CI_Model
     }
 
     public function getwhere_sempropenguji($data){
-        $query = $this->db->select('tb_sempro.*,tb_tesis.nama,tb_tesis.nim,tb_tesis.judul,tb_tesis.status as stat')
+        $query = $this->db->select('tb_sempro.*,tb_tesis.nama,tb_tesis.nim,tb_tesis.judul,tb_tesis.status as stat,tb_penguji_sempro.catatan as cek')
         ->from('tb_sempro')
         ->join('tb_tesis','tb_sempro.id_tesis=tb_tesis.id','inner')
         ->join('tb_penguji_sempro','tb_sempro.id_tesis=tb_penguji_sempro.id_tesis','inner')

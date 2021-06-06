@@ -38,7 +38,7 @@ class M_Ujian extends CI_Model
     }
 
     public function getwhere_ujianpenguji($data){
-        $query = $this->db->select('tb_ujian.*,tb_tesis.nama,tb_tesis.nim,tb_tesis.judul,tb_tesis.status as stat')
+        $query = $this->db->select('tb_ujian.*,tb_tesis.nama,tb_tesis.nim,tb_tesis.judul,tb_tesis.status as stat, tb_penguji_ujian.catatan as cek')
         ->from('tb_ujian')
         ->join('tb_tesis','tb_ujian.id_tesis=tb_tesis.id','inner')
         ->join('tb_penguji_ujian','tb_ujian.id_tesis=tb_penguji_ujian.id_tesis','inner')

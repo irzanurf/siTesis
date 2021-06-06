@@ -2,7 +2,7 @@
 
 <div class="container-fluid">
                     <div class="d-sm-flex justify-content-between align-items-center mb-4">
-                        <h3 class="text-dark mb-0">Seminar Proposal</h3></div>
+                        <h3 class="text-dark mb-0">Ujian Tesis</h3></div>
                         <div class="row"><br>
         <div class="col-lg-8" style="float:none;margin:auto;">
         </div>
@@ -172,9 +172,9 @@
                                 
                     
                         <div class="form-group">
-                        <label><br>Komentar Penilai</label>
+                        <label><br>Komentar Penilai</label><label style="color:red; font-size:12px;"> (*Wajib diisi)</label>
                         <div >
-                            <textarea class="form-control" name="komentar"  rows="3"><?=$total->catatan;?></textarea>
+                            <textarea class="form-control" name="komentar" rows="3" required=""><?=$total->catatan;?></textarea>
                         </div>
                         </div>
                                 

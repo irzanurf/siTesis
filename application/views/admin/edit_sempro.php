@@ -121,6 +121,33 @@
                                 </div>
 
                                 <div class="form-group">
+                                    <label>Penguji 5</label>
+                                    <select class="chosen-select-width" name="dosen5">
+                                    <?php if (empty($penguji5->id_penguji)) : ?>
+                                    <option value="">Please Select</option>
+                                        <?php
+                                        foreach ($dosen as $ds) {
+                                            ?>
+                                           <option value="<?php echo $ds->username; ?>"><?php echo $ds->nama; ?></option>
+                                            <?php
+                                        }
+                                        ?>
+                                    </select>
+
+                                    <?php else : ?>
+                                    <option value="">Please Select</option>
+                                        <?php
+                                        foreach ($dosen as $ds) {
+                                            ?>
+                                           <option value="<?php echo $ds->username; ?>"<?php echo ($penguji5->id_penguji==$ds->username) ? "selected='selected'" : "" ?>><?php echo $ds->nama; ?> </option>
+                                            <?php
+                                        }
+                                        ?>
+                                    </select>
+                                    <?php endif; ?>
+                                </div>
+
+                                <div class="form-group">
                                     <button type="submit" id="submit" class="btn btn-success">Submit</button>
                                 </div>
                             </form>

@@ -2,6 +2,30 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 require 'vendor/autoload.php';
 
+function tgl_indo($tanggal){
+	$bulan = array (
+		1 =>   'Januari',
+		'Februari',
+		'Maret',
+		'April',
+		'Mei',
+		'Juni',
+		'Juli',
+		'Agustus',
+		'September',
+		'Oktober',
+		'November',
+		'Desember'
+	);
+	$pecahkan = explode('-', $tanggal);
+	
+	// variabel pecahkan 0 = tanggal
+	// variabel pecahkan 1 = bulan
+	// variabel pecahkan 2 = tahun
+ 
+	return $pecahkan[2] . ' ' . $bulan[ (int)$pecahkan[1] ] . ' ' . $pecahkan[0];
+}
+
 class Admin extends CI_Controller {
 
     public function __construct()
@@ -34,6 +58,46 @@ class Admin extends CI_Controller {
         $this->load->view("layout/footer");
     }
 
+    public function detail_sempro()
+    {
+        $username = $this->session->userdata('username');
+        $id_tesis = $this->input->post('id');
+        if($id_tesis==NULL){
+            redirect("Admin/seminar_proposal");
+        }
+        $data['tesis'] = $this->M_Tesis->getwhere_tesis(array('tb_tesis.id'=>$id_tesis))->row();
+        $data['view'] = $this->M_Sempro->getwhere_sempro(array('id_tesis'=>$id_tesis))->row();
+        $data['app'] = $this->M_Nilai->get_app_sempro()->result();
+        $data['penguji1'] = $this->M_Pengujian->getwhere_penguji(array('id_tesis'=>$id_tesis,'ket'=>"penguji1"))->row();
+        $data['penguji2'] = $this->M_Pengujian->getwhere_penguji(array('id_tesis'=>$id_tesis,'ket'=>"penguji2"))->row();
+        $data['penguji3'] = $this->M_Pengujian->getwhere_penguji(array('id_tesis'=>$id_tesis,'ket'=>"penguji3"))->row();
+        $data['penguji4'] = $this->M_Pengujian->getwhere_penguji(array('id_tesis'=>$id_tesis,'ket'=>"penguji4"))->row();
+        $data['penguji5'] = $this->M_Pengujian->getwhere_penguji(array('id_tesis'=>$id_tesis,'ket'=>"penguji5"))->row();
+        $this->load->view('layout/header_admin', $username);
+        $this->load->view('admin/detail_sempro', $data);
+        $this->load->view("layout/footer"); 
+    }
+
+    public function detail_ujian ()
+    {
+        $username = $this->session->userdata('username');
+        $id_tesis = $this->input->post('id');
+        if($id_tesis==NULL){
+            redirect("Admin/ujian_tesis");
+        }
+        $data['tesis'] = $this->M_Tesis->getwhere_tesis_ujian(array('tb_tesis.id'=>$id_tesis))->row();
+        $data['view'] = $this->M_Ujian->getwhere_ujian(array('id_tesis'=>$id_tesis))->row();
+        $data['app'] = $this->M_Nilai->get_app_sempro()->result();
+        $data['penguji1'] = $this->M_Pengujian->getwhere_penguji_ujian(array('id_tesis'=>$id_tesis,'ket'=>"penguji1"))->row();
+        $data['penguji2'] = $this->M_Pengujian->getwhere_penguji_ujian(array('id_tesis'=>$id_tesis,'ket'=>"penguji2"))->row();
+        $data['penguji3'] = $this->M_Pengujian->getwhere_penguji_ujian(array('id_tesis'=>$id_tesis,'ket'=>"penguji3"))->row();
+        $data['penguji4'] = $this->M_Pengujian->getwhere_penguji_ujian(array('id_tesis'=>$id_tesis,'ket'=>"penguji4"))->row();
+        $data['penguji5'] = $this->M_Pengujian->getwhere_penguji_ujian(array('id_tesis'=>$id_tesis,'ket'=>"penguji5"))->row();
+        $this->load->view('layout/header_admin', $username);
+        $this->load->view('admin/detail_ujian', $data);
+        $this->load->view("layout/footer");
+    }
+
     public function ba_sempro()
     {
         $username = $this->session->userdata('username');
@@ -48,6 +112,7 @@ class Admin extends CI_Controller {
         $data['penguji2'] = $this->M_Pengujian->getwhere_penguji(array('id_tesis'=>$id_tesis,'ket'=>"penguji2"))->row();
         $data['penguji3'] = $this->M_Pengujian->getwhere_penguji(array('id_tesis'=>$id_tesis,'ket'=>"penguji3"))->row();
         $data['penguji4'] = $this->M_Pengujian->getwhere_penguji(array('id_tesis'=>$id_tesis,'ket'=>"penguji4"))->row();
+        $data['penguji5'] = $this->M_Pengujian->getwhere_penguji(array('id_tesis'=>$id_tesis,'ket'=>"penguji5"))->row();
         $this->load->view('layout/header_admin', $username);
         $this->load->view('admin/ba_sempro', $data);
         $this->load->view("layout/footer");
@@ -79,22 +144,28 @@ class Admin extends CI_Controller {
         $templateProcessor = new \PhpOffice\PhpWord\TemplateProcessor('assets/template/template1.docx');
         $judul = $this->input->post('judul',true);
         $tgl = $this->input->post('tgl',true);
+        $tgl_new = date('Y-m-d', strtotime($tgl));
+        $tgl_indo = tgl_indo($tgl_new);
         $tempat = $this->input->post('tempat',true);
         $status = $this->input->post('app',true);
         $nama = $this->input->post('nama',true);
         $nim = $this->input->post('nim',true);
+        $now = tgl_indo(date('Y-m-d'));
         $penguji1=$this->input->post('penguji1',true);
         $penguji2=$this->input->post('penguji2',true);
         $penguji3=$this->input->post('penguji3',true);
         $penguji4=$this->input->post('penguji4',true);
+        $penguji5=$this->input->post('penguji5',true);
         $nilai1=$this->input->post('nilai1',true);
         $nilai2=$this->input->post('nilai2',true);
         $nilai3=$this->input->post('nilai3',true);
         $nilai4=$this->input->post('nilai4',true);
+        $nilai5=$this->input->post('nilai5',true);
         $cat1=$this->input->post('cat1',true);
         $cat2=$this->input->post('cat2',true);
         $cat3=$this->input->post('cat3',true);
         $cat4=$this->input->post('cat4',true);
+        $cat5=$this->input->post('cat5',true);
         $total=$this->input->post('total',true);
         if($total>=80 && $total<=100){
             $grade = "A";
@@ -112,7 +183,8 @@ class Admin extends CI_Controller {
             $grade = "E";
         }
         $templateProcessor->setValues([
-        'tgl' => "$tgl",
+        'tgl' => "$tgl_indo",
+        'now' => "$now",
         'tempat' => "$tempat",
         'nama' => "$nama",
         'nim' => "$nim",
@@ -121,14 +193,17 @@ class Admin extends CI_Controller {
         'penguji2' => "$penguji2",
         'penguji3' => "$penguji3",
         'penguji4' => "$penguji4",
+        'penguji5' => "$penguji5",
         'nilai1' => "$nilai1",
         'nilai2' => "$nilai2",
         'nilai3' => "$nilai3",
         'nilai4' => "$nilai4",
-        'komentar1' => "$cat1",
-        'komentar2' => "$cat2",
-        'komentar3' => "$cat3",
-        'komentar4' => "$cat4",
+        'nilai5' => "$nilai5",
+        'komentar1' => "$cat1".",",
+        'komentar2' => "$cat2".",",
+        'komentar3' => "$cat3".",",
+        'komentar4' => "$cat4".",",
+        'komentar5' => "$cat5".",",
         'app' => "$status",
         'rata' => "$total",
         'grade' => "$grade",
@@ -145,6 +220,9 @@ class Admin extends CI_Controller {
         $templateProcessor = new \PhpOffice\PhpWord\TemplateProcessor('assets/template/template2.docx');
         $judul = $this->input->post('judul',true);
         $tgl = $this->input->post('tgl',true);
+        $tgl_new = date('Y-m-d', strtotime($tgl));
+        $tgl_indo = tgl_indo($tgl_new);
+        $now = tgl_indo(date('Y-m-d'));
         $tempat = $this->input->post('tempat',true);
         $status = $this->input->post('app',true);
         $nama = $this->input->post('nama',true);
@@ -177,7 +255,8 @@ class Admin extends CI_Controller {
             $grade = "E";
         }
         $templateProcessor->setValues([
-        'tgl' => "$tgl",
+        'tgl' => "$tgl_indo",
+        'now' => "$now",
         'tempat' => "$tempat",
         'nama' => "$nama",
         'nim' => "$nim",
@@ -252,6 +331,7 @@ class Admin extends CI_Controller {
         $penguji2=$this->input->post('dosen2',true);
         $penguji3=$this->input->post('dosen3',true);
         $penguji4=$this->input->post('dosen4',true);
+        $penguji5=$this->input->post('dosen5',true);
         $tesis = [
             "nim"=>$nim,
             "nama"=>$this->input->post('nama',true),
@@ -291,7 +371,15 @@ class Admin extends CI_Controller {
             $dosen4 = ["ket"=>"penguji4",
                         "id_tesis"=>$id_tesis,
                         "id_penguji"=>$penguji4];
-            $this->M_Pengujian->insert_penguji_sempro($dosen4,$id_tesis,$penguji5);
+            $this->M_Pengujian->insert_penguji_sempro($dosen4,$id_tesis,$penguji4);
+        }
+
+        if(empty($penguji5)){}
+        else{
+            $dosen5 = ["ket"=>"penguji5",
+                        "id_tesis"=>$id_tesis,
+                        "id_penguji"=>$penguji5];
+            $this->M_Pengujian->insert_penguji_sempro($dosen5,$id_tesis,$penguji5);
         }
         $this->session->set_flashdata('message', '<div class="alert alert-success alert-block" align="center"><strong>Data berhasil direkam</strong></div>');
         redirect("admin/seminar_proposal"); 
@@ -365,15 +453,15 @@ class Admin extends CI_Controller {
             $dosen4 = ["ket"=>"penguji4",
                         "id_tesis"=>$id_tesis,
                         "id_penguji"=>$penguji4];
-            $this->M_Pengujian->insert_penguji_ujian($dosen4,$id_tesis,$penguji5);
+            $this->M_Pengujian->insert_penguji_ujian($dosen4,$id_tesis,$penguji4);
         }
 
         if(empty($penguji5)){}
         else{
-            $dosen4 = ["ket"=>"penguji5",
+            $dosen5 = ["ket"=>"penguji5",
                         "id_tesis"=>$id_tesis,
                         "id_penguji"=>$penguji5];
-            $this->M_Pengujian->insert_penguji_ujian($dosen4,$id_tesis,$penguji5);
+            $this->M_Pengujian->insert_penguji_ujian($dosen5,$id_tesis,$penguji5);
         }
 
         $this->session->set_flashdata('message', '<div class="alert alert-success alert-block" align="center"><strong>Data berhasil direkam</strong></div>');
@@ -412,6 +500,7 @@ class Admin extends CI_Controller {
         $data['penguji2'] = $this->M_Pengujian->getwhere_penguji(array('id_tesis'=>$id_tesis,'ket'=>"penguji2"))->row();
         $data['penguji3'] = $this->M_Pengujian->getwhere_penguji(array('id_tesis'=>$id_tesis,'ket'=>"penguji3"))->row();
         $data['penguji4'] = $this->M_Pengujian->getwhere_penguji(array('id_tesis'=>$id_tesis,'ket'=>"penguji4"))->row();
+        $data['penguji5'] = $this->M_Pengujian->getwhere_penguji(array('id_tesis'=>$id_tesis,'ket'=>"penguji5"))->row();
         $this->load->view('layout/header_admin', $username);
         $this->load->view('admin/set_approval_sempro', $data);
         $this->load->view("layout/footer");
@@ -510,6 +599,7 @@ class Admin extends CI_Controller {
         $data['penguji2'] = $this->M_Pengujian->getwhere_penguji(array('id_tesis'=>$id_tesis,'ket'=>"penguji2"))->row();
         $data['penguji3'] = $this->M_Pengujian->getwhere_penguji(array('id_tesis'=>$id_tesis,'ket'=>"penguji3"))->row();
         $data['penguji4'] = $this->M_Pengujian->getwhere_penguji(array('id_tesis'=>$id_tesis,'ket'=>"penguji4"))->row();
+        $data['penguji5'] = $this->M_Pengujian->getwhere_penguji(array('id_tesis'=>$id_tesis,'ket'=>"penguji5"))->row();
         $this->load->view('layout/header_admin', $username);
         $this->load->view('admin/edit_sempro', $data);
         $this->load->view("layout/footer");
@@ -653,6 +743,7 @@ class Admin extends CI_Controller {
         $penguji2=$this->input->post('dosen2',true);
         $penguji3=$this->input->post('dosen3',true);
         $penguji4=$this->input->post('dosen4',true);
+        $penguji5=$this->input->post('dosen5',true);
         $tesis = [
             "nim"=>$nim,
             "nama"=>$this->input->post('nama',true),
@@ -693,6 +784,15 @@ class Admin extends CI_Controller {
                         "id_tesis"=>$id_tesis,  
                         "id_penguji"=>$penguji4];
         $this->M_Pengujian->update_penguji($dosen4,$id_tesis,$ket4);
+        }
+
+        if(empty($penguji5)){}
+        else{
+            $ket5 = "penguji5";
+            $dosen5 = [ "ket"=>"penguji5",
+                        "id_tesis"=>$id_tesis,  
+                        "id_penguji"=>$penguji5];
+        $this->M_Pengujian->update_penguji($dosen5,$id_tesis,$ket5);
         }
 
         $this->session->set_flashdata('message', '<div class="alert alert-success alert-block" align="center"><strong>Data berhasil direkam</strong></div>');
