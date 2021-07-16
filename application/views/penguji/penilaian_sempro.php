@@ -9,56 +9,12 @@
     </div>
     <div class="col-lg-8" style="float:none;margin:auto;">
     <!-- /.row -->
-    <?= form_open_multipart('Penguji/addPenilaianSempro');?>
+    <form role="form" method="post" action="<?= base_url('Penguji/addPenilaianSempro');?>" enctype="multipart/form-data">
                                 
                                 <div class="form-group">
                                     <input type="hidden" class="form-control" name="id" value=<?= $tesis->id?>  >
                                 </div>
-                                <div class="form-group">
-                                    <label>Mahasiswa</label>
-                                    <input class="form-control" name="nama-nim" value="<?= $tesis->nama?> (<?= $tesis->nim?>)" disabled>
-                                </div>
-
-                                <div class="form-group">
-                                    <label>Judul</label>
-                                    <input class="form-control" name="judul" value="<?= $tesis->judul?>" disabled>
-                                </div>
-
-                                <div class="form-group">
-                                    <label>Pembimbing Ketua/Penguji 1</label>
-                                    <input class="form-control" name="penguji1" value="<?= $penguji1->nama?>" disabled>
-                                </div>
-
-                                <div class="form-group">
-                                    <label>Pembimbing Anggota/Penguji 2</label>
-                                    <input class="form-control" name="penguji1" value="<?= $penguji2->nama?>" disabled>
-                                </div>
-
-                                <div class="form-group">
-                                    <label>Penguji 3</label>
-                                    <?php 
-                                    if(empty($penguji3->nama)) :?>
-                                    <input class="form-control" name="penguji1" value="-" disabled>
-
-                                    <?php
-                                    else : ?>
-                                    <input class="form-control" name="penguji1" value="<?= $penguji3->nama ?>" disabled>
-
-                                    <?php endif; ?>
-                                </div>
-
-                                <div class="form-group">
-                                    <label>Penguji 4</label>
-                                    <?php 
-                                    if(empty($penguji4->nama)) :?>
-                                    <input class="form-control" name="penguji1" value="-" disabled>
-
-                                    <?php
-                                    else : ?>
-                                    <input class="form-control" name="penguji1" value="<?= $penguji4->nama ?>" disabled>
-
-                                    <?php endif; ?>
-                                </div>
+                                
                                 <p><br>Keterangan: <br> SB-Sangat Baik (bobot angka 90), B-Baik (bobot angka 75), <br>
                                 CK-Cukup (bobot angka 60), K-Kurang (bobot angka 40) <br> Nilai = Bobot x Skor</p>
                                 <table class="table table-bordered" width="100%" cellspacing="0">
@@ -199,6 +155,10 @@
                             <textarea class="form-control" name="komentar" rows="3" required=""></textarea>
                         </div>
                         </div>
+
+                        <label>File Lampiran</label><label style="color:red; font-size:12px;"> (Opsional)</label><br>
+                        <input type="file" accept="application/pdf" name="file"><br>
+                        <label style="color:red; font-size:12px;">.pdf maks 10mb</label><br><br>
                                 
 
                                

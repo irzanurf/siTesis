@@ -34,7 +34,7 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label>Tempat Seminar Proposal/Link Seminar Proposal</label>
+                                    <label>Tempat Ujian Tesis/Link Ujian Tesis</label>
                                     <input class="form-control" name="tempat" value="<?= $view->tempat?>" readonly>
                                 </div>
 

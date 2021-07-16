@@ -25,7 +25,7 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label>Tanggal Seminar Proposal</label><label style="color:red; font-size:12px;"> (*Wajib diisi)</label>
+                                    <label>Tanggal Ujian Tesis</label><label style="color:red; font-size:12px;"> (*Wajib diisi)</label>
                                     <input type="date" class="form-control" name="tgl" required="">
                                 </div>
 

@@ -36,25 +36,25 @@
                                             <td><?= $tgl ?> </td>
                                             <td>
                                             <?php if (empty($v->cek)) :?>
-                                                <form style="display:inline-block;" method="post" action="<?=base_url('Penguji/penilaian_sempro');?>">
+                                                <form style="display:inline-block;" method="get" action="<?=base_url('Penguji/sempro');?>">
                                                 <input type='hidden' name="id" value="<?= $v->id_tesis ?>">
                                                 <button type="Submit" class="btn btn-success">
                                                 Penilaian
                                                 </button>
                                                 </form>
 
-                                                <?php elseif (!empty($v->cek) && (($v->status)=="" || ($v->status)==0 || ($v->status)==NULL || ($v->status)=="Graded" || empty($v->cek))) :?>
-                                                <form style="display:inline-block;" method="post" action="<?=base_url('Penguji/edit_penilaian_sempro');?>">
+                                            <?php elseif (($v->status)=="ACC A" || ($v->status)=="ACC B" || ($v->status)=="ACC C" || ($v->status)=="ACC D"):?>
+                                               Telah di approve pengelola 
+                                                
+                                            <?php else : ?>
+                                                <form style="display:inline-block;" method="get" action="<?=base_url('Penguji/sempro');?>">
                                                 <input type='hidden' name="id" value="<?= $v->id_tesis ?>">
                                                 <button type="Submit" class="btn btn-info">
                                                 Edit
                                                 </button>
                                                 </form>
-
-                                            <?php else :?>
-                                               Telah di approve pengelola 
-
-                                            <?php endif ?>
+                                            
+                                            <?php endif; ?>
                                             </td>
                                         </tr>
                                         <?php } ?>

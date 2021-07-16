@@ -9,6 +9,7 @@ class Welcome extends CI_Controller {
         //load model admin
         $this->load->model('M_Login');
         $this->load->model('M_Dosen');
+        $this->load->model('M_Pengumuman');
         
     }
 
@@ -121,8 +122,9 @@ class Welcome extends CI_Controller {
     public function profile()
     {
         $username = $this->session->userdata('username');
+        $nama['nama'] = $this->M_Pengumuman->get_nama(array('username'=>$username))->row();
         $data['nama']= $this->M_Dosen->getwhere_dosen(array('username'=>$username))->result();
-        $this->load->view('layout/header_penguji', $username);
+        $this->load->view('layout/header_penguji', $nama);
         $this->load->view('profile', $data);
         $this->load->view("layout/footer");
     }

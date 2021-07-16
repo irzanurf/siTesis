@@ -53,6 +53,45 @@ class Penguji extends CI_Controller {
         // $this->load->view("layout/footer");
     }
 
+    public function sempro()
+    {
+        $username = $this->session->userdata('username');
+        $id_tesis = $this->input->get('id');
+        if($id_tesis==NULL){
+            redirect("Penguji/seminar_proposal");
+        }
+        $data['v'] = $this->M_Sempro->getwhere_sempropenguji(array('tb_sempro.id_tesis'=>$id_tesis, 'id_penguji'=>$username))->row();
+        $data['tesis'] = $this->M_Tesis->getwhere_tesis(array('tb_tesis.id'=>$id_tesis))->row();
+        $data['penguji1'] = $this->M_Pengujian->getwhere_penguji(array('id_tesis'=>$id_tesis,'ket'=>"penguji1"))->row();
+        $data['penguji2'] = $this->M_Pengujian->getwhere_penguji(array('id_tesis'=>$id_tesis,'ket'=>"penguji2"))->row();
+        $data['penguji3'] = $this->M_Pengujian->getwhere_penguji(array('id_tesis'=>$id_tesis,'ket'=>"penguji3"))->row();
+        $data['penguji4'] = $this->M_Pengujian->getwhere_penguji(array('id_tesis'=>$id_tesis,'ket'=>"penguji4"))->row();
+        $nama['nama'] = $this->M_Pengumuman->get_nama(array('username'=>$username))->row();
+        $this->load->view('layout/header_penguji', $nama);
+        $this->load->view('penguji/sempro', $data);
+        $this->load->view("layout/footer");
+    }
+
+    public function ut()
+    {
+        $username = $this->session->userdata('username');
+        $id_tesis = $this->input->get('id');
+        if($id_tesis==NULL){
+            redirect("Penguji/ujian_tesis");
+        }
+        $data['v'] = $this->M_Ujian->getwhere_ujianpenguji(array('tb_ujian.id_tesis'=>$id_tesis, 'id_penguji'=>$username))->row();
+        $data['tesis'] = $this->M_Tesis->getwhere_tesis_ujian(array('tb_tesis.id'=>$id_tesis))->row();
+        $data['penguji1'] = $this->M_Pengujian->getwhere_penguji_ujian(array('id_tesis'=>$id_tesis,'ket'=>"penguji1"))->row();
+        $data['penguji2'] = $this->M_Pengujian->getwhere_penguji_ujian(array('id_tesis'=>$id_tesis,'ket'=>"penguji2"))->row();
+        $data['penguji3'] = $this->M_Pengujian->getwhere_penguji_ujian(array('id_tesis'=>$id_tesis,'ket'=>"penguji3"))->row();
+        $data['penguji4'] = $this->M_Pengujian->getwhere_penguji_ujian(array('id_tesis'=>$id_tesis,'ket'=>"penguji4"))->row();
+        $data['penguji5'] = $this->M_Pengujian->getwhere_penguji_ujian(array('id_tesis'=>$id_tesis,'ket'=>"penguji5"))->row();
+        $nama['nama'] = $this->M_Pengumuman->get_nama(array('username'=>$username))->row();
+        $this->load->view('layout/header_penguji', $nama);
+        $this->load->view('penguji/ut', $data);
+        $this->load->view("layout/footer");
+    }
+
     public function penilaian_sempro()
     {
         $username = $this->session->userdata('username');
@@ -62,10 +101,6 @@ class Penguji extends CI_Controller {
         }
         $data['tesis'] = $this->M_Tesis->getwhere_tesis(array('tb_tesis.id'=>$id_tesis))->row();
         $data['nilai'] = $this->M_Nilai->get_nilai()->result();
-        $data['penguji1'] = $this->M_Pengujian->getwhere_penguji(array('id_tesis'=>$id_tesis,'ket'=>"penguji1"))->row();
-        $data['penguji2'] = $this->M_Pengujian->getwhere_penguji(array('id_tesis'=>$id_tesis,'ket'=>"penguji2"))->row();
-        $data['penguji3'] = $this->M_Pengujian->getwhere_penguji(array('id_tesis'=>$id_tesis,'ket'=>"penguji3"))->row();
-        $data['penguji4'] = $this->M_Pengujian->getwhere_penguji(array('id_tesis'=>$id_tesis,'ket'=>"penguji4"))->row();
         $nama['nama'] = $this->M_Pengumuman->get_nama(array('username'=>$username))->row();
         $this->load->view('layout/header_penguji', $nama);
         $this->load->view('penguji/penilaian_sempro', $data);
@@ -83,10 +118,6 @@ class Penguji extends CI_Controller {
         $data['nilai'] = $this->M_Nilai->get_nilai()->result();
         $data['detail'] = $this->M_Nilai->get_nilai_sempro($id_tesis, $username)->result();
         $data['total'] = $this->M_Pengujian->getwhere_penguji(array('id_tesis'=>$id_tesis,'id_penguji'=>$username))->row();
-        $data['penguji1'] = $this->M_Pengujian->getwhere_penguji(array('id_tesis'=>$id_tesis,'ket'=>"penguji1"))->row();
-        $data['penguji2'] = $this->M_Pengujian->getwhere_penguji(array('id_tesis'=>$id_tesis,'ket'=>"penguji2"))->row();
-        $data['penguji3'] = $this->M_Pengujian->getwhere_penguji(array('id_tesis'=>$id_tesis,'ket'=>"penguji3"))->row();
-        $data['penguji4'] = $this->M_Pengujian->getwhere_penguji(array('id_tesis'=>$id_tesis,'ket'=>"penguji4"))->row();
         $nama['nama'] = $this->M_Pengumuman->get_nama(array('username'=>$username))->row();
         $this->load->view('layout/header_penguji', $nama);
         $this->load->view('penguji/edit_penilaian_sempro', $data);
@@ -123,7 +154,6 @@ class Penguji extends CI_Controller {
         $data['tesis'] = $this->M_Tesis->getwhere_tesis_ujian(array('tb_tesis.id'=>$id_tesis))->row();
         $data['nilai'] = $this->M_Nilai->get_nilai()->result();
         $data['detail'] = $this->M_Nilai->get_nilai_ujian($id_tesis, $username)->result();
-        $cek = $data['detail'];
         $data['total'] = $this->M_Pengujian->getwhere_penguji_ujian(array('id_tesis'=>$id_tesis,'id_penguji'=>$username))->row();
         $data['penguji1'] = $this->M_Pengujian->getwhere_penguji_ujian(array('id_tesis'=>$id_tesis,'ket'=>"penguji1"))->row();
         $data['penguji2'] = $this->M_Pengujian->getwhere_penguji_ujian(array('id_tesis'=>$id_tesis,'ket'=>"penguji2"))->row();
@@ -175,6 +205,23 @@ class Penguji extends CI_Controller {
         $this->M_Sempro->update_status($status, $id_tesis);
 
         };
+        $file = $_FILES['file'];
+        if(empty($file['name'])){}
+            else{
+            $config['upload_path'] = './assets/saran_sempro';
+            $config['encrypt_name'] = TRUE;
+            $config['allowed_types'] = 'pdf';
+
+            $this->load->library('upload',$config);
+            if(!$this->upload->do_upload('file')){
+                echo "Upload Gagal"; die();
+            } else {
+                $file=$this->upload->data('file_name');
+            }
+            $datafile = [
+            "file"=>$file,];
+            $this->M_Pengujian->update_nilaiTotal($id_tesis,$username,$datafile);
+        }
         $this->session->set_flashdata('message', '<div class="alert alert-success alert-block" align="center"><strong>Penilaian berhasil direkam</strong></div>');
         redirect("Penguji/seminar_proposal"); 
     }
@@ -215,6 +262,23 @@ class Penguji extends CI_Controller {
         $this->M_Pengujian->update_nilaiSempro($id_tesis,$username,$komp,$detail);
         
         };
+        $file = $_FILES['file'];
+        if(empty($file['name'])){}
+            else{
+            $config['upload_path'] = './assets/saran_sempro';
+            $config['encrypt_name'] = TRUE;
+            $config['allowed_types'] = 'pdf';
+
+            $this->load->library('upload',$config);
+            if(!$this->upload->do_upload('file')){
+                echo "Upload Gagal"; die();
+            } else {
+                $file=$this->upload->data('file_name');
+            }
+            $datafile = [
+            "file"=>$file,];
+            $this->M_Pengujian->update_nilaiTotal($id_tesis,$username,$datafile);
+        }
         $this->session->set_flashdata('message', '<div class="alert alert-success alert-block" align="center"><strong>Penilaian berhasil direkam</strong></div>');
         redirect("Penguji/seminar_proposal"); 
     }
@@ -256,6 +320,23 @@ class Penguji extends CI_Controller {
         $this->M_Ujian->update_status($status, $id_tesis);
 
         };
+        $file = $_FILES['file'];
+        if(empty($file['name'])){}
+            else{
+            $config['upload_path'] = './assets/saran_ujian';
+            $config['encrypt_name'] = TRUE;
+            $config['allowed_types'] = 'pdf';
+
+            $this->load->library('upload',$config);
+            if(!$this->upload->do_upload('file')){
+                echo "Upload Gagal"; die();
+            } else {
+                $file=$this->upload->data('file_name');
+            }
+            $datafile = [
+            "file"=>$file,];
+            $this->M_Pengujian->update_nilaiTotalUjian($id_tesis,$username,$datafile);
+        }
         $this->session->set_flashdata('message', '<div class="alert alert-success alert-block" align="center"><strong>Penilaian berhasil direkam</strong></div>');
         redirect("Penguji/ujian_tesis"); 
     }
@@ -294,6 +375,23 @@ class Penguji extends CI_Controller {
         $this->M_Pengujian->update_nilaiUjian($id_tesis,$username,$komp,$detail);
 
         };
+        $file = $_FILES['file'];
+        if(empty($file['name'])){}
+            else{
+            $config['upload_path'] = './assets/saran_ujian';
+            $config['encrypt_name'] = TRUE;
+            $config['allowed_types'] = 'pdf';
+
+            $this->load->library('upload',$config);
+            if(!$this->upload->do_upload('file')){
+                echo "Upload Gagal"; die();
+            } else {
+                $file=$this->upload->data('file_name');
+            }
+            $datafile = [
+            "file"=>$file,];
+            $this->M_Pengujian->update_nilaiTotalUjian($id_tesis,$username,$datafile);
+        }
         $this->session->set_flashdata('message', '<div class="alert alert-success alert-block" align="center"><strong>Penilaian berhasil direkam</strong></div>');
         redirect("Penguji/ujian_tesis"); 
     }

@@ -44,7 +44,7 @@ class M_Pengujian extends CI_Model
 
     public function getwhere_penguji_ujian(array $data)
     {
-        $query = $this->db->select('tb_penguji_ujian.*,tb_dosen.nama')
+        $query = $this->db->select('tb_penguji_ujian.*,tb_dosen.nama, tb_dosen.username')
         ->from('tb_penguji_ujian')
         ->join('tb_dosen','tb_penguji_ujian.id_penguji=tb_dosen.username','inner')
         ->where($data)

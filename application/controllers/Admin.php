@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 require 'vendor/autoload.php';
-
+use NcJoes\OfficeConverter\OfficeConverter;
 function tgl_indo($tanggal){
 	$bulan = array (
 		1 =>   'Januari',
@@ -140,32 +140,40 @@ class Admin extends CI_Controller {
 
     public function print_sempro()
     {
+        $button = $this->input->post('button',true);
         $id_tesis = $this->input->post('id',true);
-        $templateProcessor = new \PhpOffice\PhpWord\TemplateProcessor('assets/template/template1.docx');
-        $judul = $this->input->post('judul',true);
+        
+        $pdf = new \Clegginabox\PDFMerger\PDFMerger;
+        $judul = str_replace('&', '&amp;', $this->input->post('judul',true));
         $tgl = $this->input->post('tgl',true);
         $tgl_new = date('Y-m-d', strtotime($tgl));
         $tgl_indo = tgl_indo($tgl_new);
-        $tempat = $this->input->post('tempat',true);
+        $tempat =str_replace('&', '&amp;', $this->input->post('tempat',true));
         $status = $this->input->post('app',true);
         $nama = $this->input->post('nama',true);
         $nim = $this->input->post('nim',true);
         $now = tgl_indo(date('Y-m-d'));
+        $nip_penguji1 = $this->input->post('nip_penguji1',true);
         $penguji1=$this->input->post('penguji1',true);
         $penguji2=$this->input->post('penguji2',true);
         $penguji3=$this->input->post('penguji3',true);
         $penguji4=$this->input->post('penguji4',true);
         $penguji5=$this->input->post('penguji5',true);
+        $file1=$this->input->post('file1',true);
+        $file2=$this->input->post('file2',true);
+        $file3=$this->input->post('file3',true);
+        $file4=$this->input->post('file4',true);
+        $file5=$this->input->post('file5',true);
         $nilai1=$this->input->post('nilai1',true);
         $nilai2=$this->input->post('nilai2',true);
         $nilai3=$this->input->post('nilai3',true);
         $nilai4=$this->input->post('nilai4',true);
         $nilai5=$this->input->post('nilai5',true);
-        $cat1=$this->input->post('cat1',true);
-        $cat2=$this->input->post('cat2',true);
-        $cat3=$this->input->post('cat3',true);
-        $cat4=$this->input->post('cat4',true);
-        $cat5=$this->input->post('cat5',true);
+        $cat1=str_replace('&', '&amp;', $this->input->post('cat1',true));
+        $cat2=str_replace('&', '&amp;', $this->input->post('cat2',true));
+        $cat3=str_replace('&', '&amp;', $this->input->post('cat3',true));
+        $cat4=str_replace('&', '&amp;', $this->input->post('cat4',true));
+        $cat5=str_replace('&', '&amp;', $this->input->post('cat5',true));
         $total=$this->input->post('total',true);
         if($total>=80 && $total<=100){
             $grade = "A";
@@ -182,62 +190,122 @@ class Admin extends CI_Controller {
         elseif($total<=44){
             $grade = "E";
         }
-        $templateProcessor->setValues([
-        'tgl' => "$tgl_indo",
-        'now' => "$now",
-        'tempat' => "$tempat",
-        'nama' => "$nama",
-        'nim' => "$nim",
-        'judul' => "$judul",
-        'penguji1' => "$penguji1",
-        'penguji2' => "$penguji2",
-        'penguji3' => "$penguji3",
-        'penguji4' => "$penguji4",
-        'penguji5' => "$penguji5",
-        'nilai1' => "$nilai1",
-        'nilai2' => "$nilai2",
-        'nilai3' => "$nilai3",
-        'nilai4' => "$nilai4",
-        'nilai5' => "$nilai5",
-        'komentar1' => "$cat1".",",
-        'komentar2' => "$cat2".",",
-        'komentar3' => "$cat3".",",
-        'komentar4' => "$cat4".",",
-        'komentar5' => "$cat5".",",
-        'app' => "$status",
-        'rata' => "$total",
-        'grade' => "$grade",
-        ]);
-
-        header("Content-Disposition: attachment; filename=Berita Acara Sempro.docx");
-
-        $templateProcessor->saveAs('php://output');
+        
+        if($button==1){
+            $templateProcessor = new \PhpOffice\PhpWord\TemplateProcessor('assets/template/template1.docx');
+            $templateProcessor->setValues([
+                'tgl' => "$tgl_indo",
+                'now' => "$now",
+                'tempat' => "$tempat",
+                'nama' => "$nama",
+                'nip1' => "$nip_penguji1",
+                'nim' => "$nim",
+                'judul' => "$judul",
+                'penguji1' => "$penguji1",
+                'penguji2' => "$penguji2",
+                'penguji3' => "$penguji3",
+                'penguji4' => "$penguji4",
+                'penguji5' => "$penguji5",
+                'nilai1' => "$nilai1",
+                'nilai2' => "$nilai2",
+                'nilai3' => "$nilai3",
+                'nilai4' => "$nilai4",
+                'nilai5' => "$nilai5",
+                'app' => "$status",
+                'rata' => "$total",
+                'grade' => "$grade",
+                ]);
+                header("Content-Disposition: attachment; filename=Admin Sempro $nim.docx");
+        
+                $templateProcessor->saveAs('php://output');
+        }
+        elseif($button==2){
+            $templateProcessor = new \PhpOffice\PhpWord\TemplateProcessor('assets/template/template1-2.docx');
+            $templateProcessor->setValues([
+                'tgl' => "$tgl_indo",
+                'now' => "$now",
+                'tempat' => "$tempat",
+                'nama' => "$nama",
+                'nim' => "$nim",
+                'judul' => "$judul",
+                'penguji1' => "$penguji1",
+                'penguji2' => "$penguji2",
+                'penguji3' => "$penguji3",
+                'penguji4' => "$penguji4",
+                'penguji5' => "$penguji5",
+                'nilai1' => "$nilai1",
+                'nilai2' => "$nilai2",
+                'nilai3' => "$nilai3",
+                'nilai4' => "$nilai4",
+                'nilai5' => "$nilai5",
+                'komentar1' => "$cat1",
+                'komentar2' => "$cat2",
+                'komentar3' => "$cat3",
+                'komentar4' => "$cat4",
+                'komentar5' => "$cat5",
+                'app' => "$status",
+                'rata' => "$total",
+                'grade' => "$grade",
+                ]);
+                $rand=md5(uniqid(rand(), true));
+                \PhpOffice\PhpWord\Settings::setPdfRendererPath('vendor/dompdf/dompdf');
+                \PhpOffice\PhpWord\Settings::setPdfRendererName('DomPDF');
+                
+                $templateProcessor->saveAs('assets/temp/'."$rand".'.docx');
+                $temp = \PhpOffice\PhpWord\IOFactory::load('assets/temp/'."$rand".'.docx');
+                $xmlWriter = \PhpOffice\PhpWord\IOFactory::createWriter($temp , 'PDF');
+                $xmlWriter->save('assets/temp/'."$rand".'.pdf', TRUE);
+                $pdf->addPDF('assets/temp/'."$rand".'.pdf', 'all');
+                for($i=1; $i<6; $i++){
+                    $attach="file"."$i";
+                    if(empty(${$attach}) || ${$attach}==NULL || ${$attach}==""){}
+                    else {
+                    $pdf->addPDF('assets/saran_sempro/'.${$attach}, 'all');
+                    }
+                }
+                $pdf->merge('download', "daftar-sempro-$nim.pdf");
+                unlink('assets/temp/'."$rand".'.docx');
+                unlink('assets/temp/'."$rand".'.pdf');
+        }
+        
     }
 
     public function print_ujian()
     {
+        $pdf = new \Clegginabox\PDFMerger\PDFMerger;
+        $button = $this->input->post('button',true);
         $id_tesis = $this->input->post('id',true);
-        $templateProcessor = new \PhpOffice\PhpWord\TemplateProcessor('assets/template/template2.docx');
-        $judul = $this->input->post('judul',true);
+        $judul = str_replace('&', '&amp;', $this->input->post('judul',true));
         $tgl = $this->input->post('tgl',true);
         $tgl_new = date('Y-m-d', strtotime($tgl));
         $tgl_indo = tgl_indo($tgl_new);
         $now = tgl_indo(date('Y-m-d'));
-        $tempat = $this->input->post('tempat',true);
+        $tempat =str_replace('&', '&amp;', $this->input->post('tempat',true));
         $status = $this->input->post('app',true);
         $nama = $this->input->post('nama',true);
         $nim = $this->input->post('nim',true);
         $lama = $this->input->post('lama',true);
+        $nip_penguji1 = $this->input->post('nip_penguji1',true);
         $penguji1=$this->input->post('penguji1',true);
         $penguji2=$this->input->post('penguji2',true);
         $penguji3=$this->input->post('penguji3',true);
         $penguji4=$this->input->post('penguji4',true);
         $penguji5=$this->input->post('penguji5',true);
+        $file1=$this->input->post('file1',true);
+        $file2=$this->input->post('file2',true);
+        $file3=$this->input->post('file3',true);
+        $file4=$this->input->post('file4',true);
+        $file5=$this->input->post('file5',true);
         $nilai1=$this->input->post('nilai1',true);
         $nilai2=$this->input->post('nilai2',true);
         $nilai3=$this->input->post('nilai3',true);
         $nilai4=$this->input->post('nilai4',true);
         $nilai5=$this->input->post('nilai5',true);
+        $cat1=str_replace('&', '&amp;', $this->input->post('cat1',true));
+        $cat2=str_replace('&', '&amp;', $this->input->post('cat2',true));
+        $cat3=str_replace('&', '&amp;', $this->input->post('cat3',true));
+        $cat4=str_replace('&', '&amp;', $this->input->post('cat4',true));
+        $cat5=str_replace('&', '&amp;', $this->input->post('cat5',true));
         $total=$this->input->post('total',true);
         if($total>=80 && $total<=100){
             $grade = "A";
@@ -254,32 +322,87 @@ class Admin extends CI_Controller {
         elseif($total<=44){
             $grade = "E";
         }
-        $templateProcessor->setValues([
-        'tgl' => "$tgl_indo",
-        'now' => "$now",
-        'tempat' => "$tempat",
-        'nama' => "$nama",
-        'nim' => "$nim",
-        'judul' => "$judul",
-        'penguji1' => "$penguji1",
-        'penguji2' => "$penguji2",
-        'penguji3' => "$penguji3",
-        'penguji4' => "$penguji4",
-        'penguji5' => "$penguji5",
-        'nilai1' => "$nilai1",
-        'nilai2' => "$nilai2",
-        'nilai3' => "$nilai3",
-        'nilai4' => "$nilai4",
-        'nilai5' => "$nilai5",
-        'revisi' => "$lama"." minggu",
-        'app' => "$status",
-        'rata' => "$total",
-        'grade' => "$grade",
-        ]);
+        if($button==1){
+            $templateProcessor = new \PhpOffice\PhpWord\TemplateProcessor('assets/template/template2.docx');
+            $templateProcessor->setValues([
+                'tgl' => "$tgl_indo",
+                'now' => "$now",
+                'tempat' => "$tempat",
+                'nama' => "$nama",
+                'nip1' => "$nip_penguji1",
+                'nim' => "$nim",
+                'judul' => "$judul",
+                'penguji1' => "$penguji1",
+                'penguji2' => "$penguji2",
+                'penguji3' => "$penguji3",
+                'penguji4' => "$penguji4",
+                'penguji5' => "$penguji5",
+                'nilai1' => "$nilai1",
+                'nilai2' => "$nilai2",
+                'nilai3' => "$nilai3",
+                'nilai4' => "$nilai4",
+                'nilai5' => "$nilai5",
+                'revisi' => "$lama"." minggu",
+                'app' => "$status",
+                'rata' => "$total",
+                'grade' => "$grade",
+                ]);
+        
+                header("Content-Disposition: attachment; filename=Admin Ujian $nim.docx");
+        
+                $templateProcessor->saveAs('php://output');
+        }
 
-        header("Content-Disposition: attachment; filename=Berita Acara Ujian Tesis.docx");
-
-        $templateProcessor->saveAs('php://output');
+        elseif($button==2){
+            $templateProcessor = new \PhpOffice\PhpWord\TemplateProcessor('assets/template/template2-2.docx');
+            $templateProcessor->setValues([
+                'tgl' => "$tgl_indo",
+                'now' => "$now",
+                'tempat' => "$tempat",
+                'nama' => "$nama",
+                'nim' => "$nim",
+                'judul' => "$judul",
+                'penguji1' => "$penguji1",
+                'penguji2' => "$penguji2",
+                'penguji3' => "$penguji3",
+                'penguji4' => "$penguji4",
+                'penguji5' => "$penguji5",
+                'komentar1' => "$cat1",
+                'komentar2' => "$cat2",
+                'komentar3' => "$cat3",
+                'komentar4' => "$cat4",
+                'komentar5' => "$cat5",
+                'nilai1' => "$nilai1",
+                'nilai2' => "$nilai2",
+                'nilai3' => "$nilai3",
+                'nilai4' => "$nilai4",
+                'nilai5' => "$nilai5",
+                'revisi' => "$lama"." minggu",
+                'app' => "$status",
+                'rata' => "$total",
+                'grade' => "$grade",
+                ]);
+                $rand=md5(uniqid(rand(), true));
+                \PhpOffice\PhpWord\Settings::setPdfRendererPath('vendor/dompdf/dompdf');
+                \PhpOffice\PhpWord\Settings::setPdfRendererName('DomPDF');
+                
+                $templateProcessor->saveAs('assets/temp/'."$rand".'.docx');
+                $temp = \PhpOffice\PhpWord\IOFactory::load('assets/temp/'."$rand".'.docx');
+                $xmlWriter = \PhpOffice\PhpWord\IOFactory::createWriter($temp , 'PDF');
+                $xmlWriter->save('assets/temp/'."$rand".'.pdf', TRUE);
+                $pdf->addPDF('assets/temp/'."$rand".'.pdf', 'all');
+                for($i=1; $i<6; $i++){
+                    $attach="file"."$i";
+                    if(empty(${$attach}) || ${$attach}==NULL || ${$attach}==""){}
+                    else {
+                    $pdf->addPDF('assets/saran_ujian/'.${$attach}, 'all');
+                    }
+                }
+                $pdf->merge('download', "daftar-ujian-$nim.pdf");
+                unlink('assets/temp/'."$rand".'.docx');
+                unlink('assets/temp/'."$rand".'.pdf');
+        }
+        
     }
 
     public function berita()

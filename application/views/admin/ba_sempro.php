@@ -11,7 +11,9 @@
     <?= form_open_multipart('Admin/print_sempro');?>
 
                                 <div class="form-group">
-                                    <button type="submit" id="submit" class="btn btn-primary"><i class="fa fa-download"></i> Download</button>
+                                    <button name="button" value="1" type="submit" id="submit" class="btn btn-primary"><i class="fa fa-download"></i> Berita acara untuk pengelola</button>
+                                
+                                    <button name="button" value="2" type="submit" id="submit" class="btn btn-success"><i class="fa fa-download"></i> Berita acara dan saran untuk mahasiswa</button>
                                 </div>
                                 
                                 <div class="form-group">
@@ -19,6 +21,9 @@
                                 </div>
                                 <div class="form-group">
                                     <textarea style="display:none;" class="form-control" name="penguji1"><?= $penguji1->nama?></textarea>
+                                </div>
+                                <div class="form-group">
+                                    <input style="display:none;" class="form-control" name="nip_penguji1" value="<?= $penguji1->username?>">
                                 </div>
                                 <div class="form-group">
                                     <textarea style="display:none;" class="form-control" name="penguji2"><?= $penguji2->nama?></textarea>
@@ -93,6 +98,7 @@
                                     else : ?>
                                     <input class="form-control" name="nilai1" value="<?= $penguji1->nilai ?>" readonly>
                                     <textarea class="form-control" name="cat1" readonly><?= $penguji1->catatan?></textarea>
+                                    <input type="hidden" class="form-control" name="file1" value="<?= $penguji1->file?>">
                                     
                                     <?php endif; ?>
                                 </div>
@@ -111,7 +117,7 @@
                                     else : ?>
                                     <input class="form-control" name="nilai2" value="<?= $penguji2->nilai ?>" readonly>
                                     <textarea class="form-control" name="cat2" readonly><?= $penguji2->catatan?></textarea>
-                                    
+                                    <input type="hidden" class="form-control" name="file2" value="<?= $penguji2->file?>">
                                     <?php endif; ?>
                                 </div>
 
@@ -129,7 +135,7 @@
                                     else :?>
                                     <input class="form-control" name="nilai3" value="<?= $penguji3->nilai ?>" readonly>
                                     <textarea class="form-control" name="cat3" readonly><?= $penguji3->catatan?></textarea>
-                                    
+                                    <input type="hidden" class="form-control" name="file3" value="<?= $penguji3->file?>">
                                     <?php endif; ?>
                                 </div>
 
@@ -147,7 +153,7 @@
                                     else : ?>
                                     <input class="form-control" name="nilai4" value="<?= $penguji4->nilai ?>" readonly>
                                     <textarea class="form-control" name="cat4" readonly><?= $penguji4->catatan?></textarea>
-                                    
+                                    <input type="hidden" class="form-control" name="file4" value="<?= $penguji4->file?>">
                                     <?php endif; ?>
                                 </div>
 
@@ -165,7 +171,7 @@
                                     else : ?>
                                     <input class="form-control" name="nilai5" value="<?= $penguji5->nilai ?>" readonly>
                                     <textarea class="form-control" name="cat5" readonly><?= $penguji5->catatan?></textarea>
-
+                                    <input type="hidden" class="form-control" name="file5" value="<?= $penguji5->file?>">
                                     <?php endif; ?>
                                 </div>
 

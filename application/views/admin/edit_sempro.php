@@ -33,7 +33,7 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label>Tempat Ujian</label><label style="color:red; font-size:12px;"> (*Wajib diisi)</label>
+                                    <label>Tempat Seminar Proposal/Link Seminar Proposal</label><label style="color:red; font-size:12px;"> (*Wajib diisi)</label>
                                     <textarea class="form-control" name="tempat" row="2" required=""><?= $view->tempat?></textarea>
                                 </div>
 
