@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>SiTesis - Undip</title>
+    <title>SIMPATI</title>
     <link rel="stylesheet" href="<?= base_url('assets/searchable/chosen.css');?>">
     <!-- Custom fonts for this template-->
     <link href="<?= base_url('assets/main/vendor/fontawesome-free/css/all.min.css');?>" rel="stylesheet" type="text/css">
@@ -20,7 +20,19 @@
     <!-- Custom styles for this template-->
     <link href="<?= base_url('assets/main/css/sb-admin-2.min.css');?>" rel="stylesheet">
     <link href="<?= base_url('assets/main/vendor/datatables/dataTables.bootstrap4.min.css');?>" rel="stylesheet">
+    <style>
+        /* Chrome, Safari, Edge, Opera */
+        input::-webkit-outer-spin-button,
+        input::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+        }
 
+        /* Firefox */
+        input[type=number] {
+        -moz-appearance: textfield;
+        }
+    </style>
 </head>
 
 <body id="page-top">
@@ -36,7 +48,7 @@
                 <div class="sidebar-brand-icon">
                 <img src="<?= base_url('assets/undip.png');?>" alt="logo" width="47" height="54"/>
                 </div>
-                <div class="sidebar-brand-text mx-3"><sup>SI</sup> Tesis</div>
+                <div class="sidebar-brand-text mx-3">SIMPATI</div>
             </a>
 
             <!-- Divider -->

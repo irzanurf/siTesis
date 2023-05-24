@@ -10,7 +10,7 @@
     <div class="row">
     <div class="col-lg-6">
     <!-- /.row -->
-    <h3><center>Informasi Seminar Proposal</center></h3>
+    <h3><center>Informasi Ujian Tesis</center></h3>
                                 <div class="form-group">
                                     <label>Mahasiswa</label>
                                     <input class="form-control" name="nama-nim" value="<?= $tesis->nama?> (<?= $tesis->nim?>)" disabled>

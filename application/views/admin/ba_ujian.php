@@ -24,9 +24,17 @@
                                 <div class="form-group">
                                     <input style="display:none;" class="form-control" name="nip_penguji1" value="<?= $penguji1->username?>">
                                 </div>
+
+                                <?php if (empty($penguji2->nama)) : ?>
                                 <div class="form-group">
-                                    <textarea style="display:none;" class="form-control" name="penguji2"><?= $penguji2->nama?></textarea>
+                                    <input type="hidden" class="form-control" name="penguji2" value="-"  >
                                 </div>
+                                <?php else : ?>
+                                <div class="form-group">
+                                <textarea style="display:none;" class="form-control" name="penguji2"><?= $penguji2->nama?></textarea>
+                                </div>
+                                <?php endif; ?>
+
                                 <?php if (empty($penguji3->nama)) : ?>
                                 <div class="form-group">
                                     <input type="hidden" class="form-control" name="penguji3" value="-"  >

@@ -15,8 +15,8 @@
                                     <input type="hidden" class="form-control" name="id" value=<?= $tesis->id?>  >
                                 </div>
                                 
-                                <p><br>Keterangan: <br> SB-Sangat Baik (bobot angka 90), B-Baik (bobot angka 75), <br>
-                                CK-Cukup (bobot angka 60), K-Kurang (bobot angka 40) <br> Nilai = Bobot x Skor</p>
+                                <p><br>Keterangan: <br> Nilai Skor maks adalah 100</p>
+                                <div class="table-responsive">
                                 <table class="table table-bordered" width="100%" cellspacing="0">
                                 <colgroup>
                                     <col span="1" style="width: 15%;">
@@ -50,15 +50,8 @@
                                         <td>Penulisan Tesis (Tesis ditulis dan disajikan dengan jelas dan bernas)</td>
                                         <td><input type="text" id="bobot1" name="bobot1" value="30" disabled></td>
                                         <!-- <td><input type="text" id="skor1" name="skor1" value=""></td> -->
-                                        <td><select class="form-control" id="skor1" name="skor1" onchange="Multiply()" required=""> <a href="javascript: void(0)" onChange="calc()"></a>
-                                        <?php
-                                        for($i=0, $count = count($nilai);$i<$count;$i++) {?>
-                                            ?>
-                                            <option value="<?php echo $nilai[$i]->nilai; ?>"<?php echo ($nilai[$i]->nilai==$detail[0]->skor) ? "selected='selected'" : "" ?>><?php echo $nilai[$i]->ket; ?> </option>
-                                            <?php
-                                        }
-                                        ?>
-                                            </select></td>
+                                        <td><input placeholder="Skor" type="number" step="any" min="0" max="100" value="<?=$detail[0]->skor?>" id="skor1" name="skor1" onchange="Multiply()" required=""> <a href="javascript: void(0)" onChange="calc()"></a>
+                                        </td>
                                         <td><input type="text" id="nilai1" name="nilai1" value="<?= $detail[0]->nilai; ?>" readonly></td>
                                         </tr>
 
@@ -67,15 +60,8 @@
                                         <td>Kelayakan Materi Tesis</td>
                                         <td><input type="text" id="bobot2" name="bobot2" value="20" disabled></td>
                                         <!-- <td><input type="text" id="skor1" name="skor1" value=""></td> -->
-                                        <td><select class="form-control" id="skor2" name="skor2" onchange="Multiply()" required=""> <a href="javascript: void(0)" onChange="calc()"></a>
-                                        <?php
-                                        for($i=0, $count = count($nilai);$i<$count;$i++) {?>
-                                            ?>
-                                            <option value="<?php echo $nilai[$i]->nilai; ?>"<?php echo ($nilai[$i]->nilai==$detail[1]->skor) ? "selected='selected'" : "" ?>><?php echo $nilai[$i]->ket; ?> </option>
-                                            <?php
-                                        }
-                                        ?>
-                                            </select></td>
+                                        <td><input placeholder="Skor" type="number" step="any" min="0" max="100" value="<?=$detail[1]->skor?>" id="skor2" name="skor2" onchange="Multiply()" required=""> <a href="javascript: void(0)" onChange="calc()"></a>
+                                        </td>
                                         <td><input type="text" id="nilai2" name="nilai2" value="<?= $detail[1]->nilai; ?>" readonly></td>
                                         </tr>
 
@@ -88,15 +74,8 @@
                                         <td>Karya dalam tesis dapat dipresentasikan secara langsung dan berfungsi dengan baik</td>
                                         <td><input type="text" id="bobot3" name="bobot3" value="20" disabled></td>
                                         <!-- <td><input type="text" id="skor1" name="skor1" value=""></td> -->
-                                        <td><select class="form-control" id="skor3" name="skor3" onchange="Multiply()" required=""> <a href="javascript: void(0)" onChange="calc()"></a>
-                                        <?php
-                                        for($i=0, $count = count($nilai);$i<$count;$i++) {?>
-                                            ?>
-                                            <option value="<?php echo $nilai[$i]->nilai; ?>"<?php echo ($nilai[$i]->nilai==$detail[2]->skor) ? "selected='selected'" : "" ?>><?php echo $nilai[$i]->ket; ?> </option>
-                                            <?php
-                                        }
-                                        ?>
-                                            </select></td>
+                                        <td><input placeholder="Skor" type="number" step="any" min="0" max="100" value="<?=$detail[2]->skor?>" id="skor3" name="skor3" onchange="Multiply()" required=""> <a href="javascript: void(0)" onChange="calc()"></a>
+                                        </td>
                                         <td><input type="text" id="nilai3" name="nilai3" value="<?= $detail[2]->nilai; ?>" readonly></td>
                                         </tr>
 
@@ -105,15 +84,8 @@
                                         <td>Mahasiswa mampu memberikan penjelasan atau argumentasi atau jawaban pertanyaan yang diajukan penguji dengan lancar dan benar</td>
                                         <td><input type="text" id="bobot4" name="bobot4" value="30" disabled></td>
                                         <!-- <td><input type="text" id="skor1" name="skor1" value=""></td> -->
-                                        <td><select class="form-control" id="skor4" name="skor4" onchange="Multiply()" required=""> <a href="javascript: void(0)" onChange="calc()"></a>
-                                        <?php
-                                        for($i=0, $count = count($nilai);$i<$count;$i++) {?>
-                                            ?>
-                                            <option value="<?php echo $nilai[$i]->nilai; ?>"<?php echo ($nilai[$i]->nilai==$detail[3]->skor) ? "selected='selected'" : "" ?>><?php echo $nilai[$i]->ket; ?> </option>
-                                            <?php
-                                        }
-                                        ?>
-                                            </select></td>
+                                        <td><input placeholder="Skor" type="number" step="any" min="0" max="100" value="<?=$detail[3]->skor?>" id="skor4" name="skor4" onchange="Multiply()" required=""> <a href="javascript: void(0)" onChange="calc()"></a>
+                                        </td>
                                         <td><input type="text" id="nilai4" name="nilai4" value="<?= $detail[3]->nilai; ?>" readonly></td>
                                         </tr>
 
@@ -125,7 +97,7 @@
 
                                     </tbody>
                                 </table>
-                                
+                                </div>
                     
                         <div class="form-group">
                         <label><br>Komentar Penilai</label><label style="color:red; font-size:12px;"> (*Wajib diisi)</label>

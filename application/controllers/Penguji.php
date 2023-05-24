@@ -129,7 +129,7 @@ class Penguji extends CI_Controller {
         $username = $this->session->userdata('username');
         $id_tesis = $this->input->post('id');
         if($id_tesis==NULL){
-            redirect("Penguji/seminar_proposal");
+            redirect("Penguji/ujian_tesis");
         }
         $data['tesis'] = $this->M_Tesis->getwhere_tesis_ujian(array('tb_tesis.id'=>$id_tesis))->row();
         $data['nilai'] = $this->M_Nilai->get_nilai()->result();

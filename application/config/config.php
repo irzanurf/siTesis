@@ -378,7 +378,7 @@ $config['encryption_key'] = '';
 |
 */
 $config['sess_driver'] = 'files';
-$config['sess_cookie_name'] = 'ci_session';
+$config['sess_cookie_name'] = 'siTesis';
 $config['sess_expiration'] = 14400;
 $config['sess_save_path'] = NULL;
 $config['sess_match_ip'] = FALSE;

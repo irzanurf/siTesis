@@ -174,7 +174,8 @@ class Admin extends CI_Controller {
         $cat3=str_replace('&', '&amp;', $this->input->post('cat3',true));
         $cat4=str_replace('&', '&amp;', $this->input->post('cat4',true));
         $cat5=str_replace('&', '&amp;', $this->input->post('cat5',true));
-        $total=$this->input->post('total',true);
+        // $total=$this->input->post('total',true);
+        $total=$this->M_Sempro->getwhere_sempro(array('id_tesis'=>$id_tesis))->row()->nilai;
         if($total>=80 && $total<=100){
             $grade = "A";
         }
@@ -233,19 +234,19 @@ class Admin extends CI_Controller {
                 'penguji3' => "$penguji3",
                 'penguji4' => "$penguji4",
                 'penguji5' => "$penguji5",
-                'nilai1' => "$nilai1",
-                'nilai2' => "$nilai2",
-                'nilai3' => "$nilai3",
-                'nilai4' => "$nilai4",
-                'nilai5' => "$nilai5",
+                // 'nilai1' => "$nilai1",
+                // 'nilai2' => "$nilai2",
+                // 'nilai3' => "$nilai3",
+                // 'nilai4' => "$nilai4",
+                // 'nilai5' => "$nilai5",
                 'komentar1' => "$cat1",
                 'komentar2' => "$cat2",
                 'komentar3' => "$cat3",
                 'komentar4' => "$cat4",
                 'komentar5' => "$cat5",
                 'app' => "$status",
-                'rata' => "$total",
-                'grade' => "$grade",
+                // 'rata' => "$total",
+                // 'grade' => "$grade",
                 ]);
                 $rand=md5(uniqid(rand(), true));
                 \PhpOffice\PhpWord\Settings::setPdfRendererPath('vendor/dompdf/dompdf');
@@ -306,7 +307,8 @@ class Admin extends CI_Controller {
         $cat3=str_replace('&', '&amp;', $this->input->post('cat3',true));
         $cat4=str_replace('&', '&amp;', $this->input->post('cat4',true));
         $cat5=str_replace('&', '&amp;', $this->input->post('cat5',true));
-        $total=$this->input->post('total',true);
+        // $total=$this->input->post('total',true);
+        $total=$this->M_Ujian->getwhere_ujian(array('id_tesis'=>$id_tesis))->row()->nilai;
         if($total>=80 && $total<=100){
             $grade = "A";
         }
@@ -372,15 +374,15 @@ class Admin extends CI_Controller {
                 'komentar3' => "$cat3",
                 'komentar4' => "$cat4",
                 'komentar5' => "$cat5",
-                'nilai1' => "$nilai1",
-                'nilai2' => "$nilai2",
-                'nilai3' => "$nilai3",
-                'nilai4' => "$nilai4",
-                'nilai5' => "$nilai5",
+                // 'nilai1' => "$nilai1",
+                // 'nilai2' => "$nilai2",
+                // 'nilai3' => "$nilai3",
+                // 'nilai4' => "$nilai4",
+                // 'nilai5' => "$nilai5",
                 'revisi' => "$lama"." minggu",
                 'app' => "$status",
-                'rata' => "$total",
-                'grade' => "$grade",
+                // 'rata' => "$total",
+                // 'grade' => "$grade",
                 ]);
                 $rand=md5(uniqid(rand(), true));
                 \PhpOffice\PhpWord\Settings::setPdfRendererPath('vendor/dompdf/dompdf');
@@ -455,6 +457,9 @@ class Admin extends CI_Controller {
         $penguji3=$this->input->post('dosen3',true);
         $penguji4=$this->input->post('dosen4',true);
         $penguji5=$this->input->post('dosen5',true);
+        if(empty($penguji2) || $penguji2=="" || $penguji2=="0"){
+            $penguji2="";
+        };
         $tesis = [
             "nim"=>$nim,
             "nama"=>$this->input->post('nama',true),
@@ -476,10 +481,13 @@ class Admin extends CI_Controller {
                     "id_penguji"=>$penguji1];
         $this->M_Pengujian->insert_penguji_sempro($dosen1,$id_tesis,$penguji1);
 
-        $dosen2 = ["ket"=>"penguji2",
-                    "id_tesis"=>$id_tesis,
-                    "id_penguji"=>$penguji2];
-        $this->M_Pengujian->insert_penguji_sempro($dosen2,$id_tesis,$penguji2);
+        if(empty($penguji2)){}
+        else{
+            $dosen2 = ["ket"=>"penguji2",
+                        "id_tesis"=>$id_tesis,
+                        "id_penguji"=>$penguji2];
+            $this->M_Pengujian->insert_penguji_sempro($dosen2,$id_tesis,$penguji2);
+        }
 
         if(empty($penguji3)){}
         else{
@@ -537,6 +545,9 @@ class Admin extends CI_Controller {
         $penguji3=$this->input->post('dosen3',true);
         $penguji4=$this->input->post('dosen4',true);
         $penguji5=$this->input->post('dosen5',true);
+        if(empty($penguji2) || $penguji2=="" || $penguji2=="0"){
+            $penguji2="";
+        };
         $tesis = [
             "nim"=>$nim,
             "nama"=>$this->input->post('nama',true),
@@ -558,10 +569,13 @@ class Admin extends CI_Controller {
                     "id_penguji"=>$penguji1];
         $this->M_Pengujian->insert_penguji_ujian($dosen1,$id_tesis,$penguji1);
 
-        $dosen2 = ["ket"=>"penguji2",
-                    "id_tesis"=>$id_tesis,
-                    "id_penguji"=>$penguji2];
-        $this->M_Pengujian->insert_penguji_ujian($dosen2,$id_tesis,$penguji2);
+        if(empty($penguji2)){}
+        else{
+            $dosen2 = ["ket"=>"penguji2",
+                        "id_tesis"=>$id_tesis,
+                        "id_penguji"=>$penguji2];
+            $this->M_Pengujian->insert_penguji_ujian($dosen2,$id_tesis,$penguji2);
+        }
 
         if(empty($penguji3)){}
         else{
@@ -867,6 +881,9 @@ class Admin extends CI_Controller {
         $penguji3=$this->input->post('dosen3',true);
         $penguji4=$this->input->post('dosen4',true);
         $penguji5=$this->input->post('dosen5',true);
+        if(empty($penguji2) || $penguji2=="" || $penguji2=="0"){
+            $penguji2="";
+        };
         $tesis = [
             "nim"=>$nim,
             "nama"=>$this->input->post('nama',true),
@@ -885,11 +902,15 @@ class Admin extends CI_Controller {
                     "id_tesis"=>$id_tesis,
                     "id_penguji"=>$penguji1];
         $this->M_Pengujian->update_penguji($dosen1,$id_tesis,$ket1);
-        $ket2 = "penguji2";
-        $dosen2 = [ "ket"=>"penguji2",
-                    "id_tesis"=>$id_tesis,
-                    "id_penguji"=>$penguji2];
-        $this->M_Pengujian->update_penguji($dosen2,$id_tesis,$ket2);
+        
+        if(empty($penguji2)){}
+        else{
+            $ket2 = "penguji2";
+            $dosen2 = ["ket"=>"penguji2",
+                        "id_tesis"=>$id_tesis,
+                        "id_penguji"=>$penguji2];
+            $this->M_Pengujian->update_penguji($dosen2,$id_tesis,$ket2);
+        }
 
         if(empty($penguji3)){}
         else{
@@ -934,6 +955,9 @@ class Admin extends CI_Controller {
         $penguji3=$this->input->post('dosen3',true);
         $penguji4=$this->input->post('dosen4',true);
         $penguji5=$this->input->post('dosen5',true);
+        if(empty($penguji2) || $penguji2=="" || $penguji2=="0"){
+            $penguji2="";
+        };
         $tesis = [
             "nim"=>$nim,
             "nama"=>$this->input->post('nama',true),
@@ -952,11 +976,15 @@ class Admin extends CI_Controller {
                     "id_tesis"=>$id_tesis,
                     "id_penguji"=>$penguji1];
         $this->M_Pengujian->update_penguji_ujian($dosen1,$id_tesis,$ket1);
-        $ket2 = "penguji2";
-        $dosen2 = [ "ket"=>"penguji2",
-                    "id_tesis"=>$id_tesis,
-                    "id_penguji"=>$penguji2];
-        $this->M_Pengujian->update_penguji_ujian($dosen2,$id_tesis,$ket2);
+
+        if(empty($penguji2)){}
+        else{
+            $ket2 = "penguji2";
+            $dosen2 = ["ket"=>"penguji2",
+                        "id_tesis"=>$id_tesis,
+                        "id_penguji"=>$penguji2];
+            $this->M_Pengujian->update_penguji_ujian($dosen2,$id_tesis,$ket2);
+        }
 
         if(empty($penguji3)){}
         else{

@@ -52,8 +52,20 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label>Pembimbing Anggota dan Penguji 2</label><label style="color:red; font-size:12px;"> (*Wajib diisi)</label>
-                                    <select class="chosen-select-width" name="dosen2"  required="">
+                                    <label>Pembimbing Anggota dan Penguji 2</label>
+                                    <select class="chosen-select-width" name="dosen2">
+                                    <?php if (empty($penguji2->id_penguji)) : ?>
+                                    <option value="">Please Select</option>
+                                        <?php
+                                        foreach ($dosen as $ds) {
+                                            ?>
+                                           <option value="<?php echo $ds->username; ?>"><?php echo $ds->nama; ?></option>
+                                            <?php
+                                        }
+                                        ?>
+                                    </select>
+
+                                    <?php else : ?>
                                     <option value="">Please Select</option>
                                         <?php
                                         foreach ($dosen as $ds) {
@@ -63,6 +75,7 @@
                                         }
                                         ?>
                                     </select>
+                                    <?php endif; ?>
                                 </div>
 
                                 <div class="form-group">
